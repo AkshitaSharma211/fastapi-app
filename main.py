@@ -35,3 +35,14 @@ def get_student_grades(student_id: int, subject: str = "all"):
 def create_student(student: Student):
     students_db.append(student)
     return student
+
+
+@app.put("/students/{student_id}")
+def update_student(student_id: int, student: Student):
+    students_db[student_id] = student
+    return student
+
+@app.delete("/students/{student_id}")
+def delete_student(student_id: int):
+    deleted = students_db.pop(student_id)
+    return {"deleted": deleted}
