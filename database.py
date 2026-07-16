@@ -19,6 +19,7 @@ class StudentDB(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     age = Column(Integer)
+    hashed_password = Column(String)
 
 Base.metadata.create_all(bind=engine)
 
