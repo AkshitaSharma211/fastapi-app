@@ -3,11 +3,22 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from jose import JWTError, jwt
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from database import get_db, StudentDB
 from auth import hash_password, verify_password, create_access_token, SECRET_KEY, ALGORITHM
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
